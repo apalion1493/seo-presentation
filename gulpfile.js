@@ -64,6 +64,14 @@ function html() {
 		.pipe(browserSync.stream());
 }
 
+function php() {
+	return gulp.src('src/*.php')
+		.pipe(plumber())
+		.pipe(ejs())
+		.pipe(gulp.dest('./build'))
+		.pipe(browserSync.stream());
+}
+
 function img() {
 	return gulp.src('src/assets/img/**/*.*')
 		.pipe(gulp.dest('build/assets/img'))
@@ -101,6 +109,7 @@ function watch() {
 	gulp.watch('src/assets/scss/**/*.scss', styles)
 	gulp.watch('src/assets/js/**/*.js', scripts)
 	gulp.watch('src/*.html', html)
+	gulp.watch('src/*.php', php)
 	gulp.watch('src/assets/img/**/*.*', img)
 	gulp.watch('src/assets/fonts/**/*.*', fonts)
 	gulp.watch('src/assets/og/**/*.*', og)
@@ -112,11 +121,12 @@ gulp.task('styles', styles);
 gulp.task('scripts', scripts);
 gulp.task('script', script);
 gulp.task('html', html);
+gulp.task('php', php);
 gulp.task('img', img);
 gulp.task('fonts', fonts);
 gulp.task('og', og);
 gulp.task('og', favicons);
 gulp.task('del', clean);
 gulp.task('watch', watch);
-gulp.task('build', gulp.series(clean, gulp.parallel(styles,scripts,script,html,img,fonts,og,favicons)));
+gulp.task('build', gulp.series(clean, gulp.parallel(styles,scripts,script,html,php,img,fonts,og,favicons)));
 gulp.task('dev', gulp.series('build','watch'));
