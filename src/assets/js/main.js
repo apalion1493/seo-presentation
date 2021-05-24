@@ -136,6 +136,29 @@ $(document).ready(function () {
                 });
             }
         });
+        
+        $('.write-ToUs__form button').click(function (e) {
+            var data = $('.write-ToUs__form').serialize();
+            $.post(
+                'send.php',
+                data
+            ).done(function (response) {
+                $('.write-ToUs__form input, .write-ToUs__form textarea').each(function () {
+                    $(this).val('');
+                });
+                $('.alert-message-sent').removeClass('d-none');
+                setTimeout(function () {
+                    $('.alert-message-sent').addClass('d-none');
+                }, 4000);
+            }).fail(function() {
+                $('.alert-message-error').removeClass('d-none');
+                setTimeout(function () {
+                    $('.alert-message-error').addClass('d-none');
+                }, 4000);
+            });
+            e.stopPropagation();
+            return false;
+        });
     });
 });
 
