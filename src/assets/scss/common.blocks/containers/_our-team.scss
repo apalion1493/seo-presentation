@@ -225,7 +225,16 @@
   right: 400px;
 }
 
+.our-team__wrapper-en {
+  padding-top: 75px;
+  padding-bottom: 75px;
+}
+
 @media (max-width: 1199.98px) {
+  .our-team__wrapper-en {
+    padding: 0;
+  }
+
   .our-team__avatar-img {
     width: 125px;
   }
